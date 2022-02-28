@@ -30,20 +30,20 @@ import java.util.Scanner;
 
 public class Activator implements BundleActivator {
     public static final Scanner SCANNER = new Scanner(System.in);
-    private static final Logger LOGGER = Logger.getLogger(StudentMain.class);
-    private static final String LOG_FILE = "log4j.properties";
-    private static final Properties PROPERTIES = new Properties();
+   // private static final Logger LOGGER = Logger.getLogger(StudentMain.class);
+    //private static final String LOG_FILE = "log4j.properties";
+  //  private static final Properties PROPERTIES = new Properties();
 
     public void start(BundleContext context) {
         System.out.println("Starting the bundle");
-        BasicConfigurator.configure();
+       /* BasicConfigurator.configure();
         try {
-            PROPERTIES.load(new FileInputStream(LOG_FILE));
-            PropertyConfigurator.configure(PROPERTIES);
+           // PROPERTIES.load(new FileInputStream(LOG_FILE));
+           // PropertyConfigurator.configure(PROPERTIES);
         } catch(Exception e) {
             LOGGER.info(e);
-        }
-        LOGGER.info("\n ---------------------------------------------------- \n     STUDENT MANAGEMENT SYSTEM     \n ----------------------------------------------------");
+        }*/
+      //  LOGGER.info("\n ---------------------------------------------------- \n     STUDENT MANAGEMENT SYSTEM     \n ----------------------------------------------------");
         StudentMain.studentMain();
     }
 

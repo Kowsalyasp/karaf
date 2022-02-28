@@ -18,7 +18,7 @@ public class StudentView {
 	public static int validateChoice() {
 		System.out.println("Enter choice:");
 
-		final String userChoice = StudentMain.SCANNER.nextLine().trim();
+		final String userChoice = StudentMain.SCANNER.next().trim();
 
 		if (!StudentManagement.getUserChoice(userChoice)) {
 			System.out.println("Enter Valid Choice (1-5)");
@@ -32,11 +32,11 @@ public class StudentView {
 	 * Gets roll number from the student and it validates the input.
 	 */
 	public int getRollNo() {
-		StudentDetails.LOGGER.info("Enter RollNo:");
-		final String rollNo = StudentMain.SCANNER.nextLine().trim();
+		System.out.println("Enter RollNo:");
+		final String rollNo = StudentMain.SCANNER.next().trim();
 	
 		if (!StudentManagement.getRollNumber(rollNo)) {
-			StudentDetails.LOGGER.info("Enter Valid RollNo (Use Only Three Digits e.g: 123)");
+			System.out.println("Enter Valid RollNo (Use Only Three Digits e.g: 123)");
 			return STUDENT_VIEW.getRollNo();
 		} else {
 			return Integer.parseInt(rollNo);
@@ -47,11 +47,11 @@ public class StudentView {
 	 * Gets a name from the student and it validates the input.
 	 */
 	public String getName() {
-		StudentDetails.LOGGER.info("Enter Name:");
-		final String name = StudentMain.SCANNER.nextLine().trim();
+		System.out.println("Enter Name:");
+		final String name = StudentMain.SCANNER.next().trim();
 		
 		if (!StudentManagement.getName(name)) {
-			StudentDetails.LOGGER.info("Enter valid name");
+			System.out.println("Enter valid name");
 			return STUDENT_VIEW.getName();
 		}
 		return name;
@@ -61,11 +61,11 @@ public class StudentView {
 	 * Get the phone number from the student and validates the input.
 	 */
 	public long getPhoneNumber() {
-		StudentDetails.LOGGER.info("Enter Phone number:");
-		final String phoneNumber = StudentMain.SCANNER.nextLine().trim();
+		System.out.println("Enter Phone number:");
+		final String phoneNumber = StudentMain.SCANNER.next().trim();
 		
 		if (!StudentManagement.getPhoneNumber(phoneNumber)) {
-			StudentDetails.LOGGER.info("Enter valid Phone number");
+			System.out.println("Enter valid Phone number");
 			return STUDENT_VIEW.getPhoneNumber();
 		} else {
 			return Long.parseLong(phoneNumber);
@@ -76,11 +76,11 @@ public class StudentView {
 	 * Get a branch and validate it according to user input.
 	 */
 	public String getBranchName() {
-		StudentDetails.LOGGER.info("Enter Branch:(IT, CSE, ECE, MECH, CIVIL)");
-		String branchName = StudentMain.SCANNER.nextLine().trim();
+		System.out.println("Enter Branch:(IT, CSE, ECE, MECH, CIVIL)");
+		String branchName = StudentMain.SCANNER.next().trim();
 		
 		if (!StudentManagement.getBranch(branchName)) {
-			StudentDetails.LOGGER.info("Enter valid Branch Name");
+			System.out.println("Enter valid Branch Name");
 			return STUDENT_VIEW.getBranchName();
 		}
 		return branchName;
@@ -90,19 +90,19 @@ public class StudentView {
 	 * Get date of birth from the student and validate it based on input.
 	 */
 	public Date getAdmissionDate() {
-		StudentDetails.LOGGER.info("Enter Admission Date (year-month-day) [e.g: 2000-02-27]");
-		String date = StudentMain.SCANNER.nextLine().trim();
+		System.out.println("Enter Admission Date (year-month-day) [e.g: 2000-02-27]");
+		String date = StudentMain.SCANNER.next().trim();
 
 		try {
 
 			if (StudentManagement.getAdmissionDate(date)) {
 				return Date.valueOf(date.toString());
 			} else {
-				StudentDetails.LOGGER.info("Enter valid date");
+				System.out.println("Enter valid date");
 				return STUDENT_VIEW.getAdmissionDate();
 			}
 		} catch (InvalidDateException e) {
-			StudentDetails.LOGGER.error("Check your date it should be ");
+			System.out.println("Check your date it should be ");
 			return STUDENT_VIEW.getAdmissionDate();
 		}
 	}
