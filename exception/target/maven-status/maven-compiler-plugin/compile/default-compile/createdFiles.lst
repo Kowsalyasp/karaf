@@ -1,0 +1,7 @@
+com\thelaunchclub\InvalidInputException.class
+com\thelaunchclub\InvalidQueryException.class
+com\thelaunchclub\Activator.class
+com\thelaunchclub\InvalidStudentDataException.class
+com\thelaunchclub\InvalidDateException.class
+com\thelaunchclub\InvalidRollNumberException.class
+com\thelaunchclub\DatabaseException.class
