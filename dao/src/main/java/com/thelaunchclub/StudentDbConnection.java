@@ -1,7 +1,7 @@
 package com.thelaunchclub;
 
+import org.osgi.service.component.annotations.Component;
 
-import com.thelaunchclub.DatabaseException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -10,9 +10,10 @@ import java.sql.DriverManager;
  * 
  * @author KowsalyaSP
  */
+@Component
 public class StudentDbConnection {
 	
-	public static Connection getConnection(){
+	public  Connection getConnection(){
 	    Connection connection = null;
 
 		try {

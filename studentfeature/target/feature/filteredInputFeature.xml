@@ -4,7 +4,6 @@
 
     <feature name='studentfeature' description='studentfeature-feature' version='1.0-SNAPSHOT'>
         <details>studentfeature details</details>
-
     </feature>
 
 </features>

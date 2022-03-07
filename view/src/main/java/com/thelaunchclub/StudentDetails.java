@@ -8,7 +8,6 @@ import com.thelaunchclub.model.Student;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-
 /**
  * Performs operation such as adding, removing, searching and updating the student details.
  */

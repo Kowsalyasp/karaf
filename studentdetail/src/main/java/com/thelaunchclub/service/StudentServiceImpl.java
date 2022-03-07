@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * The StudentImplV2 retrieve and store the student details from database.
  */
-public class StudentServiceImplV2 implements StudentService {
+public class StudentServiceImpl implements StudentService {
 
 	private static final StudentDao STUDENT_DAO = new StudentDaoImpl();
 

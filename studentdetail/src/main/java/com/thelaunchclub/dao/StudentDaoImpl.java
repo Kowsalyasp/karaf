@@ -4,7 +4,7 @@ import com.thelaunchclub.InvalidQueryException;
 import com.thelaunchclub.InvalidStudentDataException;
 import com.thelaunchclub.StudentDbConnection;
 import com.thelaunchclub.model.Student;
-
+import org.osgi.service.component.annotations.Reference;
 
 import java.sql.*;
 import java.util.HashMap;
@@ -13,8 +13,10 @@ import java.util.Map;
 /**
  * Implements the SQL query and connect it with the database.
  */
-public class StudentDaoImpl implements StudentDao {
 
+public class StudentDaoImpl implements StudentDao {
+@Reference
+	 private static StudentDbConnection dbConnection;
 	/**
 	 * Insert student data's to the database for the specified roll number.
 	 * 
@@ -23,7 +25,7 @@ public class StudentDaoImpl implements StudentDao {
 	public boolean insertStudent(final Student student) {
 		final String insertQuery = "INSERT INTO student(roll_no, name, phone_number, branch, admission_date, is_active) VALUES (?, ?, ?, ?, ?, ?)";
 
-		try (Connection connection = StudentDbConnection.getConnection();
+		try (Connection connection = dbConnection.getConnection();
 			 PreparedStatement statement = connection.prepareStatement(insertQuery);) {
 			statement.setInt(1, student.getRollNo());
 			statement.setString(2, student.getName());
@@ -49,7 +51,7 @@ public class StudentDaoImpl implements StudentDao {
 
 		final String selectQuery = "SELECT roll_no, name, phone_number, branch, admission_date FROM student WHERE is_active = true AND roll_no =?";
 
-		try (Connection connection = StudentDbConnection.getConnection();
+		try (Connection connection = dbConnection.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery);) {
 			statement.setInt(1, rollNo);
 
@@ -78,7 +80,7 @@ public class StudentDaoImpl implements StudentDao {
 	public boolean deleteStudent(final int rollNo) {
 		final String deleteQuery = "UPDATE student SET is_active = ? WHERE roll_no = ?";
 
-		try (Connection connection = StudentDbConnection.getConnection();
+		try (Connection connection = dbConnection.getConnection();
 				PreparedStatement statement = connection.prepareStatement(deleteQuery);) {
 			statement.setBoolean(1, false);
 			statement.setInt(2, rollNo);
@@ -100,7 +102,7 @@ public class StudentDaoImpl implements StudentDao {
 		boolean hasNextData = false;
 		int name = 1, branch = 1, phoneNo = 1, date = 1, rollNo = 1, count = 0;
 
-		try (Connection connection = StudentDbConnection.getConnection();) {
+		try (Connection connection = dbConnection.getConnection();) {
 
 			if (student.getName() != null) {
 				updateQuery = queryBuilder.append(" name= ").append("?").toString();
@@ -174,7 +176,7 @@ public class StudentDaoImpl implements StudentDao {
 		final String selectAllQuery = "SELECT roll_no, name, phone_number, branch, admission_date FROM student WHERE is_active = true";
 		final Map<Integer, Student> students = new HashMap<>();
 
-		try (Connection connection = StudentDbConnection.getConnection();
+		try (Connection connection = dbConnection.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(selectAllQuery);
 				ResultSet resultSet = preparedStatement.executeQuery();) {
 

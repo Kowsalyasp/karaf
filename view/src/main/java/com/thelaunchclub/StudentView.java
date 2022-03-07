@@ -1,5 +1,7 @@
 package com.thelaunchclub;
 
+import org.osgi.service.component.annotations.Reference;
+
 import java.sql.Date;
 
 /**
@@ -7,15 +9,16 @@ import java.sql.Date;
  * input".
  */
 public class StudentView {
+	@Reference
+	private static StudentValidation validation;
 
 	private static final StudentView STUDENT_VIEW = new StudentView();
 
 	public static int validateChoice() {
 		System.out.println("Enter choice:");
-
 		final String userChoice = StudentMain.SCANNER.next().trim();
 
-		if (!StudentValidation.validateChoice(userChoice)) {
+		if (!validation.validateChoice(userChoice)) {
 			System.out.println("Enter Valid Choice (1-5)");
 			return StudentView.validateChoice();
 		} else {
@@ -30,7 +33,7 @@ public class StudentView {
 		System.out.println("Enter RollNo:");
 		final String rollNo = StudentMain.SCANNER.next().trim();
 	
-		if (!StudentValidation.validateRollNumber(rollNo)) {
+		if (!validation.validateRollNumber(rollNo)) {
 			System.out.println("Enter Valid RollNo (Use Only Three Digits e.g: 123)");
 			return STUDENT_VIEW.getRollNo();
 		} else {
@@ -45,7 +48,7 @@ public class StudentView {
 		System.out.println("Enter Name:");
 		final String name = StudentMain.SCANNER.next().trim();
 		
-		if (!StudentValidation.validateName(name)) {
+		if (!validation.validateName(name)) {
 			System.out.println("Enter valid name");
 			return STUDENT_VIEW.getName();
 		}
@@ -59,7 +62,7 @@ public class StudentView {
 		System.out.println("Enter Phone number:");
 		final String phoneNumber = StudentMain.SCANNER.next().trim();
 		
-		if (!StudentValidation.validatePhoneNumber(phoneNumber)) {
+		if (!validation.validatePhoneNumber(phoneNumber)) {
 			System.out.println("Enter valid Phone number");
 			return STUDENT_VIEW.getPhoneNumber();
 		} else {
@@ -74,7 +77,7 @@ public class StudentView {
 		System.out.println("Enter Branch:(IT, CSE, ECE, MECH, CIVIL)");
 		String branchName = StudentMain.SCANNER.next().trim();
 		
-		if (!StudentValidation.validateBranchName(branchName)) {
+		if (!validation.validateBranchName(branchName)) {
 			System.out.println("Enter valid Branch Name");
 			return STUDENT_VIEW.getBranchName();
 		}
@@ -90,7 +93,7 @@ public class StudentView {
 
 		try {
 
-			if (StudentValidation.validateAdmissionDate(date)) {
+			if (validation.validateAdmissionDate(date)) {
 				return Date.valueOf(date.toString());
 			} else {
 				System.out.println("Enter valid date");

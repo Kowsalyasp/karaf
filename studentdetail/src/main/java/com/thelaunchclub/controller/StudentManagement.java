@@ -2,7 +2,7 @@ package com.thelaunchclub.controller;
 
 import com.thelaunchclub.model.Student;
 import com.thelaunchclub.service.StudentService;
-import com.thelaunchclub.service.StudentServiceImplV2;
+import com.thelaunchclub.service.StudentServiceImpl;
 
 import java.util.List;
 
@@ -13,8 +13,7 @@ import java.util.List;
  */
 public class StudentManagement {
 	
-	private static final StudentService STUDENT_INFORMATION = new StudentServiceImplV2();
-	//private static final StudentView VIEW = new StudentView();
+	private static final StudentService STUDENT_INFORMATION = new StudentServiceImpl();
 	
 	/**
 	 * Adds the student details.

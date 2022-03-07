@@ -1,16 +1,9 @@
 package com.thelaunchclub;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleException;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import java.util.Properties;
 import java.util.Scanner;
 
 /**
@@ -21,10 +14,6 @@ import java.util.Scanner;
  */
 public class StudentMain {
 	public static final Scanner SCANNER = new Scanner(System.in);
-	/*public static final Scanner SCANNER = new Scanner(System.in);
-	private static final Logger LOGGER = Logger.getLogger(StudentMain.class);
-	private static final String LOG_FILE = "log4j.properties";
-	private static final Properties PROPERTIES = new Properties();*/
 
 	/**
 	 * Method which makes use of all services such as adding, searching, removing,
@@ -33,14 +22,6 @@ public class StudentMain {
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	/*public static void main(String[] args) throws FileNotFoundException, IOException {
-		BasicConfigurator.configure();
-		PROPERTIES.load(new FileInputStream(LOG_FILE));
-		PropertyConfigurator.configure(PROPERTIES);
-		LOGGER.info("\n ---------------------------------------------------- \n     STUDENT MANAGEMENT SYSTEM     \n ----------------------------------------------------");
-		StudentMain.studentMain();
-	}*/
-
 	public static void studentMain()  {
 		int choice;
 

@@ -1,20 +1,23 @@
 package com.thelaunchclub;
 
+import org.osgi.service.component.annotations.Component;
+
 import java.time.LocalDate;
 
 /**
  * The StudentValidation implements an program to validate the user details.
  */
-public class StudentValidation {
+@Component
+public class StudentValidation implements Validation{
 
-	public static boolean validateChoice(String Choice) {
+	public  boolean validateChoice(String Choice) {
 		return (Choice.matches("[1-6]{1}")) ? true : false;
 	}
 
 	/**
 	 * Validate the roll number based on given input.
 	 */
-	public static boolean validateRollNumber(final String rollNumber) {
+	public  boolean validateRollNumber(final String rollNumber) {
 		return (rollNumber.matches("[0-9]{3}")) ? true : false; 
 			
 	}
@@ -22,28 +25,28 @@ public class StudentValidation {
 	/**
 	 * Validate the name based on given input.
 	 */
-	public static boolean validateName(final String name) {
-		return (name.matches("^[A-Za-z\\s]*$")) ? true : false;  
+	public  boolean validateName(final String name) {
+		return (name.matches("^[A-Za-z\\s]*$")) ? true : false;
 	}
 
 	/**
 	 * Validate the phone Number based on input.
 	 */
-	public static boolean validatePhoneNumber(final String phoneNumber) {
+	public  boolean validatePhoneNumber(final String phoneNumber) {
 		return (phoneNumber.matches("[6789]{1}[0-9]{9}")) ? true : false;
 	}
 
 	/**
 	 * Validate the Branch Name based on input.
 	 */
-	public static boolean validateBranchName(final String branchName) {
+	public  boolean validateBranchName(final String branchName) {
 		return (("IT".equalsIgnoreCase(branchName) || "CSE".equalsIgnoreCase(branchName) || "MECH".equalsIgnoreCase(branchName)|| "CIVIL".equalsIgnoreCase(branchName) || "ECE".equalsIgnoreCase(branchName)))? true : false;
 	}
 
 	/**
 	 * Get and validate the value of admission date by importing Date class.
 	 */
-	public static boolean validateAdmissionDate(String date) {
+	public  boolean validateAdmissionDate(String date) {
 
 		try {
 			LocalDate todayDate = LocalDate.now();

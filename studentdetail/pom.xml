@@ -13,9 +13,7 @@
     <packaging>bundle</packaging>
 
     <name>studentdetail Bundle</name>
-    <description>
-        studentdetail OSGi bundle project.
-    </description>
+    <description>studentdetail OSGi bundle project.</description>
 
     <properties>
         <maven-bundle-plugin.version>5.1.4</maven-bundle-plugin.version>
@@ -76,8 +74,6 @@
                     <maxmem>256M</maxmem>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
-
 </project>
