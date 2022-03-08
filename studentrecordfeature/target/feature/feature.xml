@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="studentrecordfeature-1.0-SNAPSHOT">
+    <feature name="studentrecordfeature" description="studentrecordfeature-feature" version="1.0.0.SNAPSHOT">
+        <details>studentrecordfeature details</details>
+        <bundle start-level="50">mvn:com.thelaunchclub/studentdetail/1.0-SNAPSHOT</bundle>
+        <bundle start-level="50" dependency="true">mvn:com.thelaunchclub/exception/1.0-SNAPSHOT</bundle>
+        <bundle start-level="50" dependency="true">mvn:com.thelaunchclub/dao/1.0-SNAPSHOT</bundle>
+        <bundle start-level="50" dependency="true">mvn:org.postgresql/postgresql/42.3.1</bundle>
+        <bundle start-level="50" dependency="true">mvn:com.thelaunchclub/validation/1.0-SNAPSHOT</bundle>
+        <bundle start-level="50" dependency="true">mvn:com.thelaunchclub/user_input/1.0-SNAPSHOT</bundle>
+    </feature>
+</features>

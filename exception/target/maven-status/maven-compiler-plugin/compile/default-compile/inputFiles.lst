@@ -1,7 +1,1 @@
-C:\Users\KowsalyaSP\eclipse-workspace\studentmanagementmodules\exception\src\main\java\com\thelaunchclub\InvalidQueryException.java
-C:\Users\KowsalyaSP\eclipse-workspace\studentmanagementmodules\exception\src\main\java\com\thelaunchclub\InvalidRollNumberException.java
-C:\Users\KowsalyaSP\eclipse-workspace\studentmanagementmodules\exception\src\main\java\com\thelaunchclub\InvalidInputException.java
-C:\Users\KowsalyaSP\eclipse-workspace\studentmanagementmodules\exception\src\main\java\com\thelaunchclub\InvalidStudentDataException.java
-C:\Users\KowsalyaSP\eclipse-workspace\studentmanagementmodules\exception\src\main\java\com\thelaunchclub\Activator.java
-C:\Users\KowsalyaSP\eclipse-workspace\studentmanagementmodules\exception\src\main\java\com\thelaunchclub\DatabaseException.java
-C:\Users\KowsalyaSP\eclipse-workspace\studentmanagementmodules\exception\src\main\java\com\thelaunchclub\InvalidDateException.java
+C:\Users\KowsalyaSP\eclipse-workspace\studentmanagement\exception\src\main\java\com\thelaunchclub\InvalidStudentDataException.java

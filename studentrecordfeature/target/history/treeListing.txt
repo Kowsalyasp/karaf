@@ -1,0 +1,6 @@
+local:com.thelaunchclub:studentdetail:jar:1.0-SNAPSHOT (compile)
+ local:com.thelaunchclub:exception:jar:1.0-SNAPSHOT (compile)
+ local:com.thelaunchclub:dao:jar:1.0-SNAPSHOT (compile)
+  local:org.postgresql:postgresql:jar:42.3.1 (compile)
+ local:com.thelaunchclub:validation:jar:1.0-SNAPSHOT (compile)
+ local:com.thelaunchclub:user_input:jar:1.0-SNAPSHOT (compile)

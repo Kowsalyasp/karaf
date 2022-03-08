@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1646758956971
+Build-Jdk-Spec: 17
+Bundle-Activator: com.thelaunchclub.Activator
+Bundle-Description: studentdetail OSGi bundle project.
+Bundle-ManifestVersion: 2
+Bundle-Name: studentdetail Bundle
+Bundle-SymbolicName: studentdetail
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin 5.1.4
+Export-Package: com.thelaunchclub;version="1.0.0.SNAPSHOT";uses:="org.os
+ gi.framework",com.thelaunchclub.controller;version="1.0.0.SNAPSHOT";use
+ s:="com.thelaunchclub.model",com.thelaunchclub.dao;version="1.0.0.SNAPS
+ HOT";uses:="com.thelaunchclub.model",com.thelaunchclub.exception;versio
+ n="1.0.0.SNAPSHOT";uses:="com.thelaunchclub",com.thelaunchclub.model;ve
+ rsion="1.0.0.SNAPSHOT",com.thelaunchclub.service;version="1.0.0.SNAPSHO
+ T";uses:="com.thelaunchclub.model",com.thelaunchclub.studentvalidation;
+ version="1.0.0.SNAPSHOT",com.thelaunchclub.validateexception;version="1
+ .0.0.SNAPSHOT";uses:="com.thelaunchclub",com.thelaunchclub.view;version
+ ="1.0.0.SNAPSHOT";uses:="com.thelaunchclub.model"
+Import-Package: com.thelaunchclub;version="[1.0,2)",com.thelaunchclub.co
+ ntroller;version="[1.0,2)",com.thelaunchclub.dao;version="[1.0,2)",com.
+ thelaunchclub.exception;version="[1.0,2)",com.thelaunchclub.model;versi
+ on="[1.0,2)",com.thelaunchclub.service;version="[1.0,2)",com.thelaunchc
+ lub.studentvalidation;version="[1.0,2)",com.thelaunchclub.validateexcep
+ tion;version="[1.0,2)",com.thelaunchclub.view;version="[1.0,2)",org.osg
+ i.framework;version="[1.9,2)",org.postgresql;version="[42.3,43)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-5.1.1.202006162103
