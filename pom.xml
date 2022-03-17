@@ -12,6 +12,8 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <maven-bundle-plugin.version>5.1.4</maven-bundle-plugin.version>
+        <osgi.version>7.0.0</osgi.version>
     </properties>
 
     <dependencyManagement>
@@ -37,12 +39,6 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Export-Package>
-                            com.thelaunchclub*;version=${project.version}
-                        </Export-Package>
-                        <Import-Package>
-                            *
-                        </Import-Package>
                     </instructions>
                 </configuration>
             </plugin>

@@ -38,13 +38,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <startLevel>50</startLevel>
                     <markTransitiveAsDependency>true</markTransitiveAsDependency>
-                    <aggregateFeatures>true</aggregateFeatures>
-                    <checkDependencyChange>true</checkDependencyChange>
-                    <failOnDependencyChange>false</failOnDependencyChange>
-                    <logDependencyChanges>true</logDependencyChanges>
-                    <overwriteChangedDependencies>true</overwriteChangedDependencies>
                 </configuration>
             </plugin>
         </plugins>

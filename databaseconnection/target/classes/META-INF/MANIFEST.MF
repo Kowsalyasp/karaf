@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1646758955883
+Bnd-LastModified: 1647500208132
 Build-Jdk-Spec: 17
 Bundle-Description: databaseconnection OSGi bundle project.
 Bundle-ManifestVersion: 2
@@ -7,9 +7,11 @@ Bundle-Name: databaseconnection Bundle
 Bundle-SymbolicName: databaseconnection
 Bundle-Version: 1.0.0.SNAPSHOT
 Created-By: Apache Maven Bundle Plugin 5.1.4
-Export-Package: com.thelaunchclub;version="1.0.0.SNAPSHOT",com.thelaunch
- club.dbexception;version="1.0.0.SNAPSHOT";uses:="com.thelaunchclub"
-Import-Package: com.thelaunchclub;version="[1.0,2)",com.thelaunchclub.db
- exception;version="[1.0,2)",org.postgresql;version="[42.3,43)"
+Export-Package: com.thelaunchclub.databaseconnection.dbexception;uses:="
+ com.thelaunchclub.exception";version="1.0.0.SNAPSHOT",com.thelaunchclub
+ .databaseconnection;version="1.0.0.SNAPSHOT"
+Import-Package: com.thelaunchclub.databaseconnection.dbexception,com.the
+ launchclub.exception;version="[1.0,2)",org.postgresql;version="[42.3,43
+ )"
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
 Tool: Bnd-5.1.1.202006162103

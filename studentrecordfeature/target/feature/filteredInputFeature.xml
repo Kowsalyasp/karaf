@@ -20,6 +20,7 @@
 
     <feature name='studentrecordfeature' description='studentrecordfeature-feature' version='1.0-SNAPSHOT'>
         <details>studentrecordfeature details</details>
+        <feature dependency = "true">jaxrs</feature>
         <!-- <config>foo=bar</config> -->
     </feature>
 
