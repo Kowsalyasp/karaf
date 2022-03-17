@@ -1,9 +1,11 @@
-package com.thelaunchclub.view;
+package com.thelaunchclub.studentdetail.view;
 
-import com.thelaunchclub.CommonInput;
-import com.thelaunchclub.Validation;
-import com.thelaunchclub.studentvalidation.StudentValidation;
-import com.thelaunchclub.validateexception.InvalidDateException;
+import com.thelaunchclub.studentdetail.studentvalidation.StudentValidation;
+import com.thelaunchclub.userinput.CommonInput;
+import com.thelaunchclub.validation.Validation;
+import com.thelaunchclub.validation.validateexception.InvalidDateException;
+import org.apache.log4j.Logger;
+
 
 import java.sql.Date;
 
@@ -17,13 +19,13 @@ public class StudentView {
 	private static final Validation validation = new Validation();
 	private static final StudentView STUDENT_VIEW = new StudentView();
 	private static final CommonInput input = new CommonInput();
+	public static final Logger LOGGER= Logger.getLogger(StudentView.class);
 
 	public static int validateChoice() {
-		System.out.println("Enter choice:");
 		final int userChoice = input.getInt("Enter choice");
 
 		if (!studentValidation.validateChoice(Integer.toString(userChoice))){
-			System.out.println("Enter Valid Choice (1-5)");
+			LOGGER.error("Enter Valid Choice (1-5)");
 			return StudentView.validateChoice();
 		} else {
 			return Integer.parseInt(Integer.toString(userChoice));
@@ -37,7 +39,7 @@ public class StudentView {
 		final int rollNo = input.getInt("Enter Roll number");
 	
 		if (!studentValidation.validateRollNumber(Integer.toString(rollNo))) {
-			System.out.println("Enter Valid RollNo (Use Only Three Digits e.g: 123)");
+			LOGGER.error("Enter Valid RollNo (Use Only Three Digits e.g: 123)");
 			return STUDENT_VIEW.getRollNo();
 		} else {
 			return Integer.parseInt(Integer.toString(rollNo));
@@ -51,7 +53,7 @@ public class StudentView {
 		final String name = input.getString("Enter name");
 		
 		if (!validation.validateName(name)) {
-			System.out.println("Enter valid name");
+			LOGGER.error("Enter valid name");
 			return STUDENT_VIEW.getName();
 		}
 		return name;
@@ -64,7 +66,7 @@ public class StudentView {
 		final Long phoneNumber = input.getLong("Enter Phone Number");
 		
 		if (!validation.validatePhoneNumber(Long.toString(phoneNumber))) {
-			System.out.println("Enter valid Phone number");
+			LOGGER.error("Enter valid Phone number");
 			return STUDENT_VIEW.getPhoneNumber();
 		} else {
 			return Long.parseLong(Long.toString(phoneNumber));
@@ -78,7 +80,7 @@ public class StudentView {
 		final String branchName = input.getString("Enter Branch:(IT, CSE, ECE, MECH, CIVIL)");
 		
 		if (!studentValidation.validateBranchName(branchName)) {
-			System.out.println("Enter valid Branch Name");
+			LOGGER.error("Enter valid Branch Name");
 			return STUDENT_VIEW.getBranchName();
 		}
 		return branchName;
@@ -95,11 +97,11 @@ public class StudentView {
 			if (validation.validateDate(date)) {
 				return Date.valueOf(date.toString());
 			} else {
-				System.out.println("Enter valid date");
+				LOGGER.error("Enter valid date");
 				return STUDENT_VIEW.getAdmissionDate();
 			}
 		} catch (InvalidDateException e) {
-			System.out.println("Check your date it should be ");
+			LOGGER.error("Check your date it should be ");
 			return STUDENT_VIEW.getAdmissionDate();
 		}
 	}

@@ -1,2 +1,2 @@
-com\thelaunchclub\dbexception\DatabaseException.class
-com\thelaunchclub\StudentDbConnection.class
+com\thelaunchclub\databaseconnection\dbexception\DatabaseException.class
+com\thelaunchclub\databaseconnection\StudentDbConnection.class

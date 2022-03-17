@@ -1,2 +1,2 @@
-com\thelaunchclub\validateexception\InvalidDateException.class
-com\thelaunchclub\Validation.class
+com\thelaunchclub\validation\Validation.class
+com\thelaunchclub\validation\validateexception\InvalidDateException.class

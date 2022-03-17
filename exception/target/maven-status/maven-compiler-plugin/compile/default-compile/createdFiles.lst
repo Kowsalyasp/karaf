@@ -1,1 +1,1 @@
-com\thelaunchclub\InvalidStudentDataException.class
+com\thelaunchclub\exception\InvalidStudentDataException.class
