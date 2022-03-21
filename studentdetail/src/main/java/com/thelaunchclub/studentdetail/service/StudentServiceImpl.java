@@ -15,6 +15,7 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
 
     private static final StudentDao STUDENT_DAO = new StudentDaoImpl();
+    private static final StudentServiceImpl STUDENT_SERVICE = new StudentServiceImpl();
 
     /**
      * Add Student Details to the database.
@@ -83,5 +84,6 @@ public class StudentServiceImpl implements StudentService {
     public boolean checkRollNo(final int rollNo) {
         return STUDENT_DAO.selectAllStudents().containsKey(rollNo);
     }
+
 }
 

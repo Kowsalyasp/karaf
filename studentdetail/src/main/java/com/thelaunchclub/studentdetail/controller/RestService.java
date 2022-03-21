@@ -12,12 +12,15 @@ import org.osgi.service.component.annotations.Deactivate;
 public class RestService {
     private Server server;
 
+    /**
+     * Activates the server and creates the connection.
+     */
     @Activate
     public void activate() {
 
         try {
             JAXRSServerFactoryBean bean = new JAXRSServerFactoryBean();
-            bean.setAddress("/students");
+            bean.setAddress("/studentfile");
             bean.setBus(BusFactory.getDefaultBus());
             bean.setProvider(new JacksonJsonProvider());
             bean.setServiceBean(new ApiServiceImpl());
@@ -27,9 +30,14 @@ public class RestService {
         }
     }
 
+    /**
+     * Deactivate the server and it destroys the connection.
+     * @throws Exception
+     */
     @Deactivate
     public void deactivate() throws Exception {
         if (server != null) {
+            server.destroy();
             System.out.println("fail");
         }
     }

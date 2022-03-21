@@ -1,15 +1,21 @@
 package com.thelaunchclub.studentdetail.controller;
 
 import com.thelaunchclub.studentdetail.model.Student;
-import org.osgi.service.component.annotations.Component;
 
 import javax.ws.rs.*;
 import java.util.List;
 
-@Produces("application/json")
-@Component
-public class ApiServiceImpl extends StudentManagement implements ApiService{
+/**
+ * Implements the API services and specifies the path to access.
+ */
+public class ApiServiceImpl extends StudentManagement implements ApiService {
 
+    /**
+     * To specify the path and post the data.
+     *
+     * @param student
+     * @return
+     */
     @Override
     @Path("/add")
     @Consumes("application/json")
@@ -18,8 +24,14 @@ public class ApiServiceImpl extends StudentManagement implements ApiService{
         return super.addStudent(student);
     }
 
+    /**
+     * By using the path it gets the data.
+     *
+     * @param rollNo
+     * @return
+     */
     @Override
-    @Path("/{rollNo}")
+    @Path("/get/{rollNo}")
     @Produces("application/json")
     @GET
     public Student searchStudent(@PathParam("rollNo") int rollNo) {
@@ -33,13 +45,25 @@ public class ApiServiceImpl extends StudentManagement implements ApiService{
         return "Hi I am Kowsi";
     }
 
+    /**
+     * Specifing the path preferred to remove the data.
+     *
+     * @param rollNo
+     * @return
+     */
     @Override
-    @Path("/{rollNo}")
+    @Path("/remove/{rollNo}")
     @DELETE
     public boolean removeStudent(@PathParam("rollNo") int rollNo) {
         return super.removeStudent(rollNo);
     }
 
+    /**
+     * For updating used put method to upload a data.
+     *
+     * @param student
+     * @return
+     */
     @Override
     @Path("/update")
     @Consumes("application/json")
@@ -48,15 +72,31 @@ public class ApiServiceImpl extends StudentManagement implements ApiService{
         return super.updateStudent(student);
     }
 
-    @Override
+    /**
+     * View all data and separated as page view using page and limit.
+     *
+     * @param page
+     * @param limit
+     * @return
+     */
     @Path("/view")
     @Produces("application/json")
     @GET
-    public List<Student> viewAllStudents() {
-        return super.viewAllStudents();
+    public List<Student> viewAllStudents(@QueryParam("page") int page, @DefaultValue("5") @QueryParam("limit") int limit) {
+        List<Student> list = super.viewAllStudents();
+        int size = list.size();
+        int start = 0;
+        int end = 0;
+
+        if (page >= 0 && limit >= 0) {
+            start = (page - 1) * limit;
+            end = page * limit;
+        }
+        if (start < size & end < size) {
+            return list.subList(start, end);
+        } else if (start < size) {
+            return list.subList(start, size);
+        }
+        return null;
     }
 }
-
-
-
-

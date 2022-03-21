@@ -2,7 +2,6 @@ package com.thelaunchclub.databaseconnection;
 
 import com.thelaunchclub.databaseconnection.dbexception.DatabaseException;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,13 +20,12 @@ public class StudentDbConnection {
 			InputStream s = new FileInputStream("C:/karaf/etc/system.properties");
 			Properties prop = new Properties();
 
-
 			prop.load(s);
-
 			String url = prop.getProperty("karaf.jdbc.url");
 			String userName = prop.getProperty("karaf.jdbc.user");
 			String password = prop.getProperty("karaf.jdbc.password");
 			Class.forName("org.postgresql.Driver");
+
 			Connection connection = DriverManager.getConnection(url, userName, password);
 			return connection;
 		} catch (Exception exception) {

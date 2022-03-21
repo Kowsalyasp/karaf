@@ -19,5 +19,6 @@ public interface StudentService {
 
 	List<Student> viewAllStudents();
 
-	boolean checkRollNo(int rollNo);	
+	boolean checkRollNo(int rollNo);
+
 }
