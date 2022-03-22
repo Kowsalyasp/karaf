@@ -1,36 +1,33 @@
 package com.thelaunchclub.databaseconnection;
 
 import com.thelaunchclub.databaseconnection.dbexception.DatabaseException;
-import java.io.FileInputStream;
-import java.io.InputStream;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.Properties;
+import java.util.Map;
 
 /**
  * Connection with PostgreSQL database
- * 
+ *
  * @author KowsalyaSP
  */
 public class StudentDbConnection {
+    public static Map<String, String> prop;
 
-	public static Connection getConnection() {
+    public static void databaseProperty(Map<String, String> properties) {
+        prop = properties;
+    }
 
-		try {
-			InputStream s = new FileInputStream("C:/karaf/etc/system.properties");
-			Properties prop = new Properties();
+    public static Connection getConnection() {
 
-			prop.load(s);
-			String url = prop.getProperty("karaf.jdbc.url");
-			String userName = prop.getProperty("karaf.jdbc.user");
-			String password = prop.getProperty("karaf.jdbc.password");
-			Class.forName("org.postgresql.Driver");
+        try {
 
-			Connection connection = DriverManager.getConnection(url, userName, password);
-			return connection;
-		} catch (Exception exception) {
-			System.out.println(exception);
-			throw new DatabaseException("Failed To Connect Database");
-		}
-	}
+            Class.forName("org.postgresql.Driver");
+            final Connection connection = DriverManager.getConnection(prop.get("karaf.jdbc.url"), prop.get("karaf.jdbc.user"), prop.get("karaf.jdbc.password"));
+            return connection;
+        } catch (Exception exception) {
+            System.out.println(exception);
+            throw new DatabaseException("Failed To Connect Database");
+        }
+    }
 }

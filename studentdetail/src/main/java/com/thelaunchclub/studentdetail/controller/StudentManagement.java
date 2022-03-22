@@ -16,10 +16,6 @@ public class StudentManagement {
 	
 	private static final StudentService STUDENT_INFORMATION = new StudentServiceImpl();
 
-	public String getString() {
-		return "hi";
-	}
-
 	/**
 	 * Adds the student details.
 	 * 
