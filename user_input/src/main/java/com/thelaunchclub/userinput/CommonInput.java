@@ -8,11 +8,23 @@ public class CommonInput {
     public static final Scanner SCANNER = new Scanner(System.in);
     public static final Logger LOGGER= Logger.getLogger(String.valueOf(CommonInput.class));
 
+    /**
+     * Get the String type user input.
+     *
+     * @param text
+     * @return
+     */
     public String getString(String text){
         System.out.println(text);
         return SCANNER.next().trim();
     }
 
+    /**
+     * Get the Long type user input.
+     *
+     * @param text
+     * @return
+     */
     public Long getLong(String text){
         System.out.println(text);
 
@@ -26,6 +38,12 @@ public class CommonInput {
         }
     }
 
+    /**
+     * Get the Integer type user input.
+     *
+     * @param text
+     * @return
+     */
     public int getInt(String text){
         System.out.println(text);
 
