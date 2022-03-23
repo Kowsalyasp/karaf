@@ -4,28 +4,28 @@ import com.thelaunchclub.studentdetail.model.Student;
 
 import javax.ws.rs.*;
 import java.util.List;
+import java.util.Map;
 
+/**
+ * ApiService for an implementation.
+ */
 public interface ApiService {
-
-    @Produces("application/json")
-    @GET
-    String getString();
 
     @Consumes("application/json")
     @POST
-    boolean addStudent(Student student);
+    Map addStudent(Student student);
 
     @Produces("application/json")
     @GET
-    Student searchStudent(int rollNo);
+    List searchStudent(int rollNo);
 
     @Produces("application/json")
     @DELETE
-    boolean removeStudent(int rollNo);
+    Map removeStudent(int rollNo);
 
     @Consumes("application/json")
     @PUT
-    boolean updateStudent(Student student);
+    Map updateStudent(Student student);
 
     @Produces("application/json")
     @GET

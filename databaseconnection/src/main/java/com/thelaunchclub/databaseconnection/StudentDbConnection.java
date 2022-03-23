@@ -12,18 +12,22 @@ import java.util.Map;
  * @author KowsalyaSP
  */
 public class StudentDbConnection {
-    public static Map<String, String> prop;
+
+    private static Map<String, String> prop;
 
     public static void databaseProperty(Map<String, String> properties) {
         prop = properties;
     }
 
+    /**
+     * Getting connection through database.
+     */
     public static Connection getConnection() {
 
         try {
-
             Class.forName("org.postgresql.Driver");
             final Connection connection = DriverManager.getConnection(prop.get("karaf.jdbc.url"), prop.get("karaf.jdbc.user"), prop.get("karaf.jdbc.password"));
+
             return connection;
         } catch (Exception exception) {
             System.out.println(exception);

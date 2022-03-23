@@ -5,6 +5,9 @@ package com.thelaunchclub.studentdetail.studentvalidation;
  */
 public class StudentValidation {
 
+	/**
+	 * Validate the input choice based on given input.
+	 */
 	public static boolean validateChoice(final String Choice) {
 		return (Choice.matches("[1-6]{1}")) ? true : false;
 	}

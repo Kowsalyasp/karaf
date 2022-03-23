@@ -1,75 +1,71 @@
 package com.thelaunchclub.studentdetail.controller;
 
 import com.thelaunchclub.studentdetail.model.Student;
+import com.thelaunchclub.studentdetail.service.StudentServiceImp;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Implements the API services and specifies the path to access.
  */
 public class ApiServiceImpl extends StudentManagement implements ApiService {
+    private static final StudentServiceImp SERVICE_IMP = new StudentServiceImp();
 
     /**
      * To specify the path and post the data.
      *
      * @param student
-     * @return
      */
     @Override
     @Path("/add")
-    @Consumes("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @POST
-    public boolean addStudent(Student student) {
-        return super.addStudent(student);
+    public Map addStudent(final Student student) {
+        return SERVICE_IMP.addStudent(student);
     }
 
     /**
      * By using the path it gets the data.
      *
      * @param rollNo
-     * @return
      */
     @Override
     @Path("/get/{rollNo}")
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     @GET
-    public Student searchStudent(@PathParam("rollNo") int rollNo) {
-        return super.searchStudent(rollNo);
-    }
-
-    @Path("/hello")
-    @Produces("application/json")
-    @GET
-    public String getString() {
-        return "Hi I am Kowsi";
+    public List searchStudent(@PathParam("rollNo") final int rollNo) {
+        return SERVICE_IMP.searchStudent(rollNo);
     }
 
     /**
      * Specifing the path preferred to remove the data.
      *
      * @param rollNo
-     * @return
      */
     @Override
     @Path("/remove/{rollNo}")
+    @Produces(MediaType.APPLICATION_JSON)
     @DELETE
-    public boolean removeStudent(@PathParam("rollNo") int rollNo) {
-        return super.removeStudent(rollNo);
+    public Map removeStudent(@PathParam("rollNo") final int rollNo) {
+        return SERVICE_IMP.removeStudent(rollNo);
     }
 
     /**
      * For updating used put method to upload a data.
      *
      * @param student
-     * @return
      */
     @Override
     @Path("/update")
-    @Consumes("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @PUT
-    public boolean updateStudent(Student student) {
-        return super.updateStudent(student);
+    public Map updateStudent(final Student student) {
+        return SERVICE_IMP.updateStudent(student);
     }
 
     /**
@@ -77,26 +73,11 @@ public class ApiServiceImpl extends StudentManagement implements ApiService {
      *
      * @param page
      * @param limit
-     * @return
      */
     @Path("/view")
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     @GET
-    public List<Student> viewAllStudents(@QueryParam("page") int page, @DefaultValue("5") @QueryParam("limit") int limit) {
-        List<Student> list = super.viewAllStudents();
-        int size = list.size();
-        int start = 0;
-        int end = 0;
-
-        if (page >= 0 && limit >= 0) {
-            start = (page - 1) * limit;
-            end = page * limit;
-        }
-        if (start < size & end < size) {
-            return list.subList(start, end);
-        } else if (start < size) {
-            return list.subList(start, size);
-        }
-        return null;
+    public List<Student> viewAllStudents(@QueryParam("page") final int page, @DefaultValue("5") @QueryParam("limit") final int limit) {
+        return super.PaginationView(page, limit);
     }
 }

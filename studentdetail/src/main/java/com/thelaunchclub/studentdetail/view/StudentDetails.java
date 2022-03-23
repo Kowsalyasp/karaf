@@ -7,6 +7,8 @@ import com.thelaunchclub.studentdetail.controller.StudentManagement;
 import com.thelaunchclub.studentdetail.exception.InvalidQueryException;
 import com.thelaunchclub.studentdetail.exception.InvalidRollNumberException;
 
+import org.apache.log4j.Logger;
+
 import java.sql.Date;
 import java.util.List;
 
@@ -15,178 +17,199 @@ import java.util.List;
  */
 public class StudentDetails {
 
-	private static final StudentView VIEW = new StudentView();
-	private static final StudentManagement STUDENT_MANAGEMENT = new StudentManagement();
+    private static final StudentView VIEW = new StudentView();
+    private static final StudentManagement STUDENT_MANAGEMENT = new StudentManagement();
+    private static final Logger LOGGER= Logger.getLogger(StudentDetails.class);
 
-	/**
-	 * Adds the student details.
-	 */
-	public static void addStudent() {
-		final int rollNo = VIEW.getRollNo();
+    /**
+     * Adds the student details.
+     */
+    public static void addStudent() {
+        final int rollNo = VIEW.getRollNo();
 
-		if (STUDENT_MANAGEMENT.checkRollNo(rollNo)) {
-			System.out.println("Roll Number Already Exist \n  Please enter another roll number");
-			StudentDetails.addStudent();
-			Activator.studentMain();
-		}
-		final String name = VIEW.getName();
-		final long phoneNumber = VIEW.getPhoneNumber();
-		final String branch = VIEW.getBranchName();
-		final Date admissionDate = VIEW.getAdmissionDate();
-		final Student student = new Student(rollNo, name, phoneNumber, branch, admissionDate);
+        if (STUDENT_MANAGEMENT.checkRollNo(rollNo)) {
+            LOGGER.info("Roll Number Already Exist \n  Please enter another roll number");
+            StudentDetails.addStudent();
+            Activator.studentMain();
+        }
+        final String name = VIEW.getName();
+        final long phoneNumber = VIEW.getPhoneNumber();
+        final String branch = VIEW.getBranchName();
+        final Date admissionDate = VIEW.getAdmissionDate();
+        final Student student = new Student(rollNo, name, phoneNumber, branch, admissionDate);
 
-		try {
+        try {
 
-			if (STUDENT_MANAGEMENT.addStudent(student)) {
-				System.out.println("Successfully Added The Student Data");
-			}
-		} catch (InvalidQueryException exception) {
-			System.out.println(exception);
-		} catch (InvalidRollNumberException exception) {
-			System.out.println(exception);
-		}
-	}
+            //if (STUDENT_MANAGEMENT.addStudent(student)) {
+                LOGGER.info("Successfully Added The Student Data");
 
-	/**
-	 * Search the student detail based on roll number.
-	 */
-	public static void searchStudent() {
-		final int rollNo = VIEW.getRollNo();
+        } catch (InvalidQueryException exception) {
+            LOGGER.error(exception);
+        } catch (InvalidRollNumberException exception) {
+            LOGGER.error(exception);
+        }
+    }
 
-		try {
-			Student student = STUDENT_MANAGEMENT.searchStudent(rollNo);
+    /**
+     * Search the student detail based on roll number.
+     */
+    public static void searchStudent() {
+        final int rollNo = VIEW.getRollNo();
 
-			System.out.println(student);
-		} catch (InvalidQueryException exception) {
-			System.out.println(exception);
-		} catch (InvalidRollNumberException exception) {
-			System.out.println(exception);
-		}
-	}
+        try {
+            List student = STUDENT_MANAGEMENT.searchStudent(rollNo);
 
-	/**
-	 * Remove the student detail for the specified roll number.
-	 */
-	public static void removeStudent() {
-		final int rollNo = VIEW.getRollNo();
+            LOGGER.info(student);
+        } catch (InvalidQueryException exception) {
+            LOGGER.error(exception);
+        } catch (InvalidRollNumberException exception) {
+            LOGGER.error(exception.getMessage());
+        }
+    }
 
-		try {
-	
-			if (STUDENT_MANAGEMENT.removeStudent(rollNo)) {
-				System.out.println("Successfully Removed");
-			}
-		} catch (InvalidQueryException exception) {
-			System.out.println(exception);
-		}
-	}
+    /**
+     * Remove the student detail for the specified roll number.
+     */
+    public static void removeStudent() {
+        final int rollNo = VIEW.getRollNo();
 
-	/**
-	 * Updates the student detail.
-	 */
+        try {
 
-	public static void updateStudent() {
-		final Student student = new Student();
-		final int rollNo = VIEW.getRollNo();
+           // if (STUDENT_MANAGEMENT.removeStudent(rollNo)) {
+                LOGGER.info("Successfully Removed");
+           // }
+        } catch (InvalidQueryException exception) {
+            LOGGER.error(exception);
+        }
+    }
 
-		if (!STUDENT_MANAGEMENT.checkRollNo(rollNo)) {
-			System.out.println("Roll Number Not Exist \n  Please enter another roll number");
-			StudentDetails.updateStudent();
-			Activator.studentMain();
-		}
-		student.setRollno(rollNo);
-		String updateInput = null;
+    /**
+     * Updates the student detail.
+     */
 
-		System.out.println("If You Want To Change Your Name Enter yes a no");
-		StudentDetails.getName(updateInput, student);
-		System.out.println("If You Want To Change Your phone number Enter yes or no");
-		StudentDetails.getPhoneNo(updateInput, student);
-		System.out.println("If You Want To Change Your Branch Name Enter yes or no");
-		StudentDetails.getBranch(updateInput, student);
-		System.out.println("If You Want To Change Your date Enter yes or no");
-		StudentDetails.getDate(updateInput, student);
+    public static void updateStudent() {
+        final Student student = new Student();
+        final int rollNo = VIEW.getRollNo();
 
-		try {
-			STUDENT_MANAGEMENT.updateStudent(student);
-			System.out.println("Successfully updated the student data");
-		} catch (InvalidQueryException exception) {
-			System.out.println(exception);
-		}
-	}
+        if (!STUDENT_MANAGEMENT.checkRollNo(rollNo)) {
+            LOGGER.info("Roll Number Not Exist \n  Please enter another roll number");
+            StudentDetails.updateStudent();
+            Activator.studentMain();
+        }
+        student.setRollno(rollNo);
+        String updateInput = null;
 
-	public static void getName(String updateInput, final Student student) {
+        LOGGER.info("If You Want To Change Your Name Enter yes a no");
+        StudentDetails.getName(updateInput, student);
+        LOGGER.info("If You Want To Change Your phone number Enter yes or no");
+        StudentDetails.getPhoneNo(updateInput, student);
+        LOGGER.info("If You Want To Change Your Branch Name Enter yes or no");
+        StudentDetails.getBranch(updateInput, student);
+        LOGGER.info("If You Want To Change Your date Enter yes or no");
+        StudentDetails.getDate(updateInput, student);
 
-		while (true) {
-			updateInput = CommonInput.SCANNER.next().trim();
+        try {
+            STUDENT_MANAGEMENT.updateStudent(student);
+            LOGGER.info("Successfully updated the student data");
+        } catch (InvalidQueryException exception) {
+            LOGGER.error(exception);
+        }
+    }
 
-			if (updateInput.equalsIgnoreCase("yes")) {
-				student.setName(VIEW.getName());
-				break;
-			} else if (updateInput.equalsIgnoreCase("no")) {
-				break;
-			} else {
-				System.out.println("Enter valid input (Only Use yes or no)");
-				continue;
-			}
-		}
-	}
-		
-	public static void getBranch(String updateInput, final Student student) {
+    /**
+     * Update student data for the specified name.
+     *
+     * @param student
+     */
+    public static void getName(String updateInput, final Student student) {
 
-		while (true) {
-			updateInput = CommonInput.SCANNER.next().trim();
+        while (true) {
+            updateInput = CommonInput.SCANNER.next().trim();
 
-			if (updateInput.equalsIgnoreCase("yes")) {
-				student.setBranch(VIEW.getBranchName());
-				break;
-			} else if (updateInput.equalsIgnoreCase("no")) {
-				break;
-			} else {
-				System.out.println("Enter valid input (Only Use yes or no)");
-				continue;
-			}
-		}
-	}
+            if (updateInput.equalsIgnoreCase("yes")) {
+                student.setName(VIEW.getName());
+                break;
+            } else if (updateInput.equalsIgnoreCase("no")) {
+                break;
+            } else {
+                LOGGER.info("Enter valid input (Only Use yes or no)");
+                continue;
+            }
+        }
+    }
 
-	public static void getPhoneNo(String updateInput, final Student student) {
+    /**
+     * Update student data for the branch name.
+     *
+     * @param student
+     */
+    public static void getBranch(String updateInput, final Student student) {
 
-		while (true) {
-			updateInput = CommonInput.SCANNER.next().trim();
+        while (true) {
+            updateInput = CommonInput.SCANNER.next().trim();
 
-			if (updateInput.equalsIgnoreCase("yes")) {
-				student.setPhoneNumber(VIEW.getPhoneNumber());
-				break;
-			} else if (updateInput.equalsIgnoreCase("no")) {
-				break;
-			} else {
-				System.out.println("Enter valid input (Only Use yes or no)");
-				continue;
-			}
-		}
-	}
+            if (updateInput.equalsIgnoreCase("yes")) {
+                student.setBranch(VIEW.getBranchName());
+                break;
+            } else if (updateInput.equalsIgnoreCase("no")) {
+                break;
+            } else {
+                LOGGER.info("Enter valid input (Only Use yes or no)");
+                continue;
+            }
+        }
+    }
 
-	public static void getDate(String updateInput, final Student student) {
+    /**
+     * Update student data for the phoneno.
+     *
+     * @param student
+     */
+    public static void getPhoneNo(String updateInput, final Student student) {
 
-		while (true) {
-			updateInput = CommonInput.SCANNER.next().trim();
+        while (true) {
+            updateInput = CommonInput.SCANNER.next().trim();
 
-			if (updateInput.equalsIgnoreCase("yes")) {
-				student.setAdmissionDate(VIEW.getAdmissionDate());
-				break;
-			} else if (updateInput.equalsIgnoreCase("no")) {
-				break;
-			} else {
-				System.out.println("Enter valid input (Only Use yes or no)");
-				continue;
-			}
-		}
-	}
+            if (updateInput.equalsIgnoreCase("yes")) {
+                student.setPhoneNumber(VIEW.getPhoneNumber());
+                break;
+            } else if (updateInput.equalsIgnoreCase("no")) {
+                break;
+            } else {
+                LOGGER.info("Enter valid input (Only Use yes or no)");
+                continue;
+            }
+        }
+    }
 
-	/**
-	 * It displays all students from the table.
-	 */
-	public static void showAllStudents() {
-		List<Student> showStudent = STUDENT_MANAGEMENT.viewAllStudents();
+    /**
+     * Update student data for the date.
+     *
+     * @param student
+     */
+    public static void getDate(String updateInput, final Student student) {
 
-		System.out.println(showStudent);
-	}
+        while (true) {
+            updateInput = CommonInput.SCANNER.next().trim();
+
+            if (updateInput.equalsIgnoreCase("yes")) {
+                student.setAdmissionDate(VIEW.getAdmissionDate());
+                break;
+            } else if (updateInput.equalsIgnoreCase("no")) {
+                break;
+            } else {
+                LOGGER.info("Enter valid input (Only Use yes or no)");
+                continue;
+            }
+        }
+    }
+
+    /**
+     * It displays all students from the database.
+     */
+    public static void showAllStudents() {
+        List<Student> showStudent = STUDENT_MANAGEMENT.viewAllStudents();
+
+        System.out.println(showStudent);
+    }
 }

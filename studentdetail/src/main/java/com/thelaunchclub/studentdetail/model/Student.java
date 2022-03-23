@@ -1,5 +1,8 @@
 package com.thelaunchclub.studentdetail.model;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.sql.Date;
 
 /**
@@ -7,66 +10,77 @@ import java.sql.Date;
  * student details.
  */
 public class Student {
-	
-	private int rollNo;
-	private String name;
-	private long phoneNumber;
-	private String branch;
-	private Date admissionDate;
 
-	public Student(int rollNo, String name, long phoneNumber, String branch, Date admissionDate) {
-		this.rollNo = rollNo;
-		this.name = name;
-		this.phoneNumber = phoneNumber;
-		this.branch = branch;
-		this.admissionDate = admissionDate;
-	}
+    @NotNull
+    private int rollNo;
 
-	public Student() {
-	}
+    @NotNull
+    @Size(min=5, max=10, message="Your name should be between 5 - 10 characters.")
+    private String name;
 
-	public int getRollNo() {
-		return rollNo;
-	}
+    @NotNull
+    @Size(min=10, max=10)
+    private long phoneNumber;
 
-	public void setRollno(int rollNo) {
-		this.rollNo = rollNo;
-	}
+    @NotNull
+    private String branch;
 
-	public String getName() {
-		return name;
-	}
+    @NotNull
+    private Date admissionDate;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Student(int rollNo, String name, long phoneNumber, String branch, Date admissionDate) {
+        this.rollNo = rollNo;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.branch = branch;
+        this.admissionDate = admissionDate;
+    }
 
-	public long getPhoneNumber() {
-		return phoneNumber;
-	}
+    public Student() {
+    }
 
-	public void setPhoneNumber(long phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+    public int getRollNo() {
+        return rollNo;
+    }
 
-	public String getBranch() {
-		return branch;
-	}
+    public void setRollno(int rollNo) {
+        this.rollNo = rollNo;
+    }
 
-	public void setBranch(String branch) {
-		this.branch = branch;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Date getAdmissionDate() {
-		return admissionDate;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setAdmissionDate(Date admissionDate) {
-		this.admissionDate = admissionDate;
-	}
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
 
-	public String toString() {
-		return String.format("\n RollNo: %s - Name: %s - PhoneNumber: %s - BranchName: %s - AdmissionDate: %s  \n", Integer.toString(rollNo), name, Long.toString(phoneNumber), branch,
-				admissionDate.toString());
-	}
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    public Date getAdmissionDate() {
+        return admissionDate;
+    }
+
+    public void setAdmissionDate(Date admissionDate) {
+        this.admissionDate = admissionDate;
+    }
+
+    public String toString() {
+        return String.format("\n RollNo: %s - Name: %s - PhoneNumber: %s - BranchName: %s - AdmissionDate: %s  \n", Integer.toString(rollNo), name, Long.toString(phoneNumber), branch,
+                admissionDate.toString());
+    }
 }

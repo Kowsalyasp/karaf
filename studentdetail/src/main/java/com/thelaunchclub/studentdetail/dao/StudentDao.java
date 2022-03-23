@@ -6,8 +6,8 @@ import java.util.Map;
 
 /**
  * Provides access to student data from database.
- * @author KowsalyaSP
  *
+ * @author KowsalyaSP
  */
 public interface StudentDao {
 	
