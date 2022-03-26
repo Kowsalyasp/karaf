@@ -4,18 +4,21 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+/**
+ * Common inputs for an different datatypes.
+ */
 public class CommonInput {
     public static final Scanner SCANNER = new Scanner(System.in);
-    public static final Logger LOGGER= Logger.getLogger(String.valueOf(CommonInput.class));
+    private static final Logger LOGGER = Logger.getLogger(String.valueOf(CommonInput.class));
 
     /**
      * Get the String type user input.
      *
      * @param text
-     * @return
      */
-    public String getString(String text){
-        System.out.println(text);
+    public String getString(String text) {
+        LOGGER.info(text);
+
         return SCANNER.next().trim();
     }
 
@@ -23,14 +26,13 @@ public class CommonInput {
      * Get the Long type user input.
      *
      * @param text
-     * @return
      */
-    public Long getLong(String text){
-        System.out.println(text);
+    public Long getLong(String text) {
+        LOGGER.info(text);
 
         try {
             return SCANNER.nextLong();
-        } catch(InputMismatchException e){
+        } catch (InputMismatchException e) {
             LOGGER.info("Enter a Valid input");
             String input = SCANNER.next();
 
@@ -42,15 +44,14 @@ public class CommonInput {
      * Get the Integer type user input.
      *
      * @param text
-     * @return
      */
-    public int getInt(String text){
-        System.out.println(text);
+    public int getInt(String text) {
+        LOGGER.info(text);
 
         try {
             return SCANNER.nextInt();
-        } catch(InputMismatchException e){
-            System.out.println("Enter a Valid input");
+        } catch (InputMismatchException e) {
+            LOGGER.info("Enter a Valid input");
             String input = SCANNER.next();
 
             return getInt(input);

@@ -13,9 +13,9 @@ public interface StudentDao {
 	
 	 boolean insertStudent(Student student);
 	
-	 Student selectStudent(int rollNo);
+	 Student selectStudent(Integer rollNo);
 	
-	 boolean deleteStudent(int rollNo);
+	 boolean deleteStudent(Integer rollNo);
 	
 	 boolean updateStudent(Student student);
 	

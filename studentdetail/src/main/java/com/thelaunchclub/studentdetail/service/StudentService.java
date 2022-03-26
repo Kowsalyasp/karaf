@@ -3,24 +3,17 @@ package com.thelaunchclub.studentdetail.service;
 import com.thelaunchclub.studentdetail.model.Student;
 
 import java.util.List;
-import java.util.Map;
 
-/**
- * Interface which provides all services.
- */
 public interface StudentService {
-	
-	Map addStudent(Student student);
+    boolean addStudent(Student student);
 
-	List searchStudent(int rollNo);
+    Student searchStudent(int rollNo);
 
-    Map removeStudent(int rollNo);
+    boolean removeStudent(int rollNo);
 
-	Map updateStudent(Student student);
+    boolean updateStudent(Student student);
 
-	List<Student> viewAllStudents();
+    List<Student> viewAllStudents();
 
-	boolean checkRollNo(int rollNo);
-
-	List<Student> showPaginationDetails(int page, int limit);
+    boolean checkRollNo(int rollNo);
 }

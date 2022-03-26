@@ -1,18 +1,23 @@
 package com.thelaunchclub.studentdetail.controller;
 
 import com.thelaunchclub.studentdetail.model.Student;
-import com.thelaunchclub.studentdetail.service.StudentServiceImp;
+import com.thelaunchclub.studentdetail.model.StudentValidator;
+import com.thelaunchclub.studentdetail.service.RestServiceImp;
+import jakarta.validation.Valid;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Implements the API services and specifies the path to access.
  */
-public class ApiServiceImpl extends StudentManagement implements ApiService {
-    private static final StudentServiceImp SERVICE_IMP = new StudentServiceImp();
+public class ApiServiceImpl implements ApiService {
+
+    private static final RestServiceImp REST_SERVICE = new RestServiceImp();
 
     /**
      * To specify the path and post the data.
@@ -24,8 +29,16 @@ public class ApiServiceImpl extends StudentManagement implements ApiService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @POST
-    public Map addStudent(final Student student) {
-        return SERVICE_IMP.addStudent(student);
+    public Map addStudent(@Valid final Student student) {
+        final List list = StudentValidator.setValidate(student);
+
+        if (!list.isEmpty()) {
+            Map map = new HashMap();
+
+            map.put("message", list);
+            return map;
+        }
+        return REST_SERVICE.addStudent(student);
     }
 
     /**
@@ -33,12 +46,20 @@ public class ApiServiceImpl extends StudentManagement implements ApiService {
      *
      * @param rollNo
      */
-    @Override
-    @Path("/get/{rollNo}")
+
+    @Path("/get")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
-    public List searchStudent(@PathParam("rollNo") final int rollNo) {
-        return SERVICE_IMP.searchStudent(rollNo);
+    public List searchStudent(@Valid @QueryParam("rollNo") final Integer rollNo) {
+        final List list = StudentValidator.studentRollNoValidate(rollNo);
+
+        if (!list.isEmpty()) {
+            List emptyList = new ArrayList();
+
+            emptyList.add(list);
+            return list;
+        }
+        return REST_SERVICE.searchStudent(rollNo);
     }
 
     /**
@@ -46,12 +67,20 @@ public class ApiServiceImpl extends StudentManagement implements ApiService {
      *
      * @param rollNo
      */
-    @Override
-    @Path("/remove/{rollNo}")
+
+    @Path("/remove")
     @Produces(MediaType.APPLICATION_JSON)
     @DELETE
-    public Map removeStudent(@PathParam("rollNo") final int rollNo) {
-        return SERVICE_IMP.removeStudent(rollNo);
+    public Map removeStudent(@Valid @QueryParam("rollNo") final Integer rollNo) {
+        final List list = StudentValidator.studentRollNoValidate(rollNo);
+
+        if (!list.isEmpty()) {
+            Map emptymap= new HashMap();
+
+            emptymap.put("message:", list);
+            return emptymap;
+        }
+        return REST_SERVICE.removeStudent(rollNo);
     }
 
     /**
@@ -64,8 +93,16 @@ public class ApiServiceImpl extends StudentManagement implements ApiService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @PUT
-    public Map updateStudent(final Student student) {
-        return SERVICE_IMP.updateStudent(student);
+    public Map updateStudent(@Valid final Student student) {
+        final List list = StudentValidator.setValidate(student);
+
+        if (!list.isEmpty()) {
+            Map map = new HashMap();
+
+            map.put("message", list);
+            return map;
+        }
+        return REST_SERVICE.updateStudent(student);
     }
 
     /**
@@ -77,7 +114,7 @@ public class ApiServiceImpl extends StudentManagement implements ApiService {
     @Path("/view")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
-    public List<Student> viewAllStudents(@QueryParam("page") final int page, @DefaultValue("5") @QueryParam("limit") final int limit) {
-        return super.PaginationView(page, limit);
+    public List<Student> viewAllStudents(@Valid @QueryParam("page") final int page, @DefaultValue("5") @QueryParam("limit") final int limit) {
+        return REST_SERVICE.showPaginationDetails(page, limit);
     }
 }

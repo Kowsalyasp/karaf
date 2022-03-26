@@ -7,8 +7,6 @@ import com.thelaunchclub.studentdetail.controller.StudentManagement;
 import com.thelaunchclub.studentdetail.exception.InvalidQueryException;
 import com.thelaunchclub.studentdetail.exception.InvalidRollNumberException;
 
-import org.apache.log4j.Logger;
-
 import java.sql.Date;
 import java.util.List;
 
@@ -19,7 +17,6 @@ public class StudentDetails {
 
     private static final StudentView VIEW = new StudentView();
     private static final StudentManagement STUDENT_MANAGEMENT = new StudentManagement();
-    private static final Logger LOGGER= Logger.getLogger(StudentDetails.class);
 
     /**
      * Adds the student details.
@@ -28,7 +25,7 @@ public class StudentDetails {
         final int rollNo = VIEW.getRollNo();
 
         if (STUDENT_MANAGEMENT.checkRollNo(rollNo)) {
-            LOGGER.info("Roll Number Already Exist \n  Please enter another roll number");
+            System.out.println("Roll Number Already Exist \n  Please enter another roll number");
             StudentDetails.addStudent();
             Activator.studentMain();
         }
@@ -40,13 +37,13 @@ public class StudentDetails {
 
         try {
 
-            //if (STUDENT_MANAGEMENT.addStudent(student)) {
-                LOGGER.info("Successfully Added The Student Data");
-
+            if (STUDENT_MANAGEMENT.addStudent(student)) {
+                System.out.println("Successfully Added The Student Data");
+            }
         } catch (InvalidQueryException exception) {
-            LOGGER.error(exception);
+            System.out.println(exception);
         } catch (InvalidRollNumberException exception) {
-            LOGGER.error(exception);
+            System.out.println(exception);
         }
     }
 
@@ -57,13 +54,13 @@ public class StudentDetails {
         final int rollNo = VIEW.getRollNo();
 
         try {
-            List student = STUDENT_MANAGEMENT.searchStudent(rollNo);
+            Student student = STUDENT_MANAGEMENT.searchStudent(rollNo);
 
-            LOGGER.info(student);
+            System.out.println(student);
         } catch (InvalidQueryException exception) {
-            LOGGER.error(exception);
+            System.out.println(exception);
         } catch (InvalidRollNumberException exception) {
-            LOGGER.error(exception.getMessage());
+            System.out.println(exception);
         }
     }
 
@@ -75,11 +72,11 @@ public class StudentDetails {
 
         try {
 
-           // if (STUDENT_MANAGEMENT.removeStudent(rollNo)) {
-                LOGGER.info("Successfully Removed");
-           // }
+            if (STUDENT_MANAGEMENT.removeStudent(rollNo)) {
+                System.out.println("Successfully Removed");
+            }
         } catch (InvalidQueryException exception) {
-            LOGGER.error(exception);
+            System.out.println(exception);
         }
     }
 
@@ -92,35 +89,30 @@ public class StudentDetails {
         final int rollNo = VIEW.getRollNo();
 
         if (!STUDENT_MANAGEMENT.checkRollNo(rollNo)) {
-            LOGGER.info("Roll Number Not Exist \n  Please enter another roll number");
+            System.out.println("Roll Number Not Exist \n  Please enter another roll number");
             StudentDetails.updateStudent();
             Activator.studentMain();
         }
-        student.setRollno(rollNo);
+        student.setRollNo(rollNo);;
         String updateInput = null;
 
-        LOGGER.info("If You Want To Change Your Name Enter yes a no");
+        System.out.println("If You Want To Change Your Name Enter yes a no");
         StudentDetails.getName(updateInput, student);
-        LOGGER.info("If You Want To Change Your phone number Enter yes or no");
+        System.out.println("If You Want To Change Your phone number Enter yes or no");
         StudentDetails.getPhoneNo(updateInput, student);
-        LOGGER.info("If You Want To Change Your Branch Name Enter yes or no");
+        System.out.println("If You Want To Change Your Branch Name Enter yes or no");
         StudentDetails.getBranch(updateInput, student);
-        LOGGER.info("If You Want To Change Your date Enter yes or no");
+        System.out.println("If You Want To Change Your date Enter yes or no");
         StudentDetails.getDate(updateInput, student);
 
         try {
             STUDENT_MANAGEMENT.updateStudent(student);
-            LOGGER.info("Successfully updated the student data");
+            System.out.println("Successfully updated the student data");
         } catch (InvalidQueryException exception) {
-            LOGGER.error(exception);
+            System.out.println(exception);
         }
     }
 
-    /**
-     * Update student data for the specified name.
-     *
-     * @param student
-     */
     public static void getName(String updateInput, final Student student) {
 
         while (true) {
@@ -132,17 +124,12 @@ public class StudentDetails {
             } else if (updateInput.equalsIgnoreCase("no")) {
                 break;
             } else {
-                LOGGER.info("Enter valid input (Only Use yes or no)");
+                System.out.println("Enter valid input (Only Use yes or no)");
                 continue;
             }
         }
     }
 
-    /**
-     * Update student data for the branch name.
-     *
-     * @param student
-     */
     public static void getBranch(String updateInput, final Student student) {
 
         while (true) {
@@ -154,17 +141,12 @@ public class StudentDetails {
             } else if (updateInput.equalsIgnoreCase("no")) {
                 break;
             } else {
-                LOGGER.info("Enter valid input (Only Use yes or no)");
+                System.out.println("Enter valid input (Only Use yes or no)");
                 continue;
             }
         }
     }
 
-    /**
-     * Update student data for the phoneno.
-     *
-     * @param student
-     */
     public static void getPhoneNo(String updateInput, final Student student) {
 
         while (true) {
@@ -176,17 +158,12 @@ public class StudentDetails {
             } else if (updateInput.equalsIgnoreCase("no")) {
                 break;
             } else {
-                LOGGER.info("Enter valid input (Only Use yes or no)");
+                System.out.println("Enter valid input (Only Use yes or no)");
                 continue;
             }
         }
     }
 
-    /**
-     * Update student data for the date.
-     *
-     * @param student
-     */
     public static void getDate(String updateInput, final Student student) {
 
         while (true) {
@@ -198,14 +175,14 @@ public class StudentDetails {
             } else if (updateInput.equalsIgnoreCase("no")) {
                 break;
             } else {
-                LOGGER.info("Enter valid input (Only Use yes or no)");
+                System.out.println("Enter valid input (Only Use yes or no)");
                 continue;
             }
         }
     }
 
     /**
-     * It displays all students from the database.
+     * It displays all students from the table.
      */
     public static void showAllStudents() {
         List<Student> showStudent = STUDENT_MANAGEMENT.viewAllStudents();

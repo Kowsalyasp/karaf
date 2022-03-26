@@ -13,21 +13,21 @@ public interface ApiService {
 
     @Consumes("application/json")
     @POST
-    Map addStudent(Student student);
+    Map addStudent(final Student student);
 
     @Produces("application/json")
     @GET
-    List searchStudent(int rollNo);
+    List searchStudent(final Integer rollNo);
 
     @Produces("application/json")
     @DELETE
-    Map removeStudent(int rollNo);
+    Map removeStudent(final Integer rollNo);
 
     @Consumes("application/json")
     @PUT
-    Map updateStudent(Student student);
+    Map updateStudent(final Student student);
 
     @Produces("application/json")
     @GET
-    List<Student> viewAllStudents();
+    List<Student> viewAllStudents(final int page, final int limit);
 }

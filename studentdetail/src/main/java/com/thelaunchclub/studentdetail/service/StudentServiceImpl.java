@@ -1,17 +1,14 @@
 package com.thelaunchclub.studentdetail.service;
 
-import com.thelaunchclub.studentdetail.model.Student;
 import com.thelaunchclub.exception.InvalidStudentDataException;
 import com.thelaunchclub.studentdetail.dao.StudentDao;
 import com.thelaunchclub.studentdetail.dao.StudentDaoImpl;
 import com.thelaunchclub.studentdetail.exception.InvalidRollNumberException;
+import com.thelaunchclub.studentdetail.model.Student;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The StudentImplV2 retrieve and store the student details from database.
- */
 public class StudentServiceImpl implements StudentService {
 
     private static final StudentDao STUDENT_DAO = new StudentDaoImpl();
@@ -86,4 +83,3 @@ public class StudentServiceImpl implements StudentService {
     }
 
 }
-

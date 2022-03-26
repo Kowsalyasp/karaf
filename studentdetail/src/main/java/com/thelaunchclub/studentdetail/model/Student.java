@@ -1,7 +1,6 @@
 package com.thelaunchclub.studentdetail.model;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.sql.Date;
 
@@ -11,24 +10,26 @@ import java.sql.Date;
  */
 public class Student {
 
-    @NotNull
-    private int rollNo;
+    @NotNull(message = "Roll number should not be null value",groups = {AddStudent.class, UpdateStudent.class, SearchStudent.class, DeleteStudent.class})
+    private Integer rollNo;
 
-    @NotNull
-    @Size(min=5, max=10, message="Your name should be between 5 - 10 characters.")
+    @NotEmpty(message = "Name should not be null value", groups = {AddStudent.class, UpdateStudent.class})
+    @Size(min = 2, max = 15, groups = {AddStudent.class, UpdateStudent.class})
+    @Pattern(regexp = "^[A-Za-z\\s]*$", groups = {AddStudent.class, UpdateStudent.class})
     private String name;
 
-    @NotNull
-    @Size(min=10, max=10)
-    private long phoneNumber;
+    @NotNull(message = "PhoneNumber should not be null value", groups = {AddStudent.class, UpdateStudent.class})
+    private Long phoneNumber;
 
-    @NotNull
+    @NotEmpty( message = "Branch Name should not be null value", groups =  {AddStudent.class, UpdateStudent.class})
+    @Size(min = 2, max = 4, groups = {AddStudent.class, UpdateStudent.class})
+    @Pattern(regexp = "IT||CSE||MECH||CIVIL||ECE", groups = {AddStudent.class, UpdateStudent.class})
     private String branch;
 
-    @NotNull
+    @NotNull(message = "Admission Date should not be null value", groups = {AddStudent.class, UpdateStudent.class})
     private Date admissionDate;
 
-    public Student(int rollNo, String name, long phoneNumber, String branch, Date admissionDate) {
+    public Student(Integer rollNo, String name, Long phoneNumber, String branch, Date admissionDate) {
         this.rollNo = rollNo;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -39,11 +40,11 @@ public class Student {
     public Student() {
     }
 
-    public int getRollNo() {
+    public Integer getRollNo() {
         return rollNo;
     }
 
-    public void setRollno(int rollNo) {
+    public void setRollNo(Integer rollNo) {
         this.rollNo = rollNo;
     }
 
@@ -55,11 +56,11 @@ public class Student {
         this.name = name;
     }
 
-    public long getPhoneNumber() {
+    public Long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(Long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

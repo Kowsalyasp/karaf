@@ -49,7 +49,6 @@ public class Activator {
 
         if (server != null) {
             server.destroy();
-            System.out.println("fail");
         }
     }
 

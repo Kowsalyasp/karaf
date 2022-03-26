@@ -75,6 +75,17 @@
             <artifactId>jakarta.ws.rs-api</artifactId>
             <version>3.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>7.0.4.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.el</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -90,7 +101,6 @@
 
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Bundle-Activator>com.thelaunchclub.studentdetail.Activator</Bundle-Activator>
                         <Export-Package>
                             com.thelaunchclub.studentdetail*;version=${project.version}
                         </Export-Package>

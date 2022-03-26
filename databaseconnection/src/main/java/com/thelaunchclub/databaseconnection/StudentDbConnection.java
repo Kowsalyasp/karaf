@@ -15,7 +15,7 @@ public class StudentDbConnection {
 
     private static Map<String, String> prop;
 
-    public static void databaseProperty(Map<String, String> properties) {
+    public static void databaseProperty(final Map<String, String> properties) {
         prop = properties;
     }
 

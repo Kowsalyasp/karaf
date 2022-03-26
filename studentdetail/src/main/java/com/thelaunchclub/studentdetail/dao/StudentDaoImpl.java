@@ -44,7 +44,7 @@ public class StudentDaoImpl implements StudentDao {
      *
      * @param rollNo
      */
-    public Student selectStudent(final int rollNo) {
+    public Student selectStudent(final Integer rollNo) {
 
         final String selectQuery = "SELECT roll_no, name, phone_number, branch, admission_date FROM student WHERE is_active = true AND roll_no =?";
 
@@ -74,7 +74,7 @@ public class StudentDaoImpl implements StudentDao {
      *
      * @param rollNo
      */
-    public boolean deleteStudent(final int rollNo) {
+    public boolean deleteStudent(final Integer rollNo) {
         final String deleteQuery = "UPDATE student SET is_active = ? WHERE roll_no = ?";
 
         try (Connection connection = StudentDbConnection.getConnection();
@@ -97,7 +97,12 @@ public class StudentDaoImpl implements StudentDao {
         final StringBuilder queryBuilder = new StringBuilder();
         String updateQuery = queryBuilder.append("UPDATE student SET").toString();
         boolean hasNextData = false;
-        int name = 1, branch = 1, phoneNo = 1, date = 1, rollNo = 1, count = 0;
+        int name = 1;
+        int branch = 1;
+        int phoneNo = 1;
+        int date = 1;
+        int rollNo = 1;
+        int                                                                                                                                                                                                                                                                                                            count = 0;
 
         try (Connection connection = StudentDbConnection.getConnection();) {
 
@@ -159,7 +164,7 @@ public class StudentDaoImpl implements StudentDao {
                     preparedStatement.setDate(date, student.getAdmissionDate());
                 }
                 preparedStatement.setInt(rollNo, student.getRollNo());
-                return preparedStatement.execute();
+                return preparedStatement.executeUpdate() > 0;
             }
         } catch (SQLException exception) {
             throw new InvalidQueryException(exception.getMessage());
